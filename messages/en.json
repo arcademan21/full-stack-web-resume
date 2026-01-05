@@ -1,0 +1,91 @@
+{
+  "Navigation": {
+    "about": "About Me",
+    "experience": "Experience",
+    "skills": "Skills",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been moved.",
+    "backButton": "Back to Home"
+  },
+  "Hero": {
+    "role": "Senior Full Stack Developer",
+    "description": "Developer with over 10 years of experience building scalable web applications and robust architectures for global companies.",
+    "downloadCV": "Download my CV",
+    "downloadFormat": "Available in PDF and TXT format",
+    "downloadPDF": "Download PDF",
+    "downloadTXT": "Download TXT"
+  },
+  "About": {
+    "title": "Professional Summary",
+    "p1": "Senior Full Stack Developer with over <strong>10 years of experience</strong> designing and developing scalable, high-performance web applications. Specialized in modern architectures using cutting-edge technologies.",
+    "p2": "Expert in AI Prompting Engineering and integrating AI tools into development. I have led technical teams in building complex enterprise solutions, implementing development best practices and scalable architectures that have served thousands of users.",
+    "quote": "My extensive career has endowed me with technical solidity that transcends specific tools. In today's dynamic environment, adapting to new languages and technologies is not a barrier, but a natural competence in my profile that allows me to contribute immediate value in any technological ecosystem."
+  },
+  "Skills": {
+    "title": "Technical Skills",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "ai_automation": "AI & Automation",
+    "database": "Database",
+    "infrastructure": "Infrastructure & DevOps",
+    "legacy_stack": "Legacy Stack",
+    "specialty": "Specialty",
+    "highlight": "Highlighted",
+    "badges": {
+      "ai_prompting": "AI Prompting Engineering",
+      "mcp_protocol": "MCP Protocol",
+      "n8n_automation": "n8n Automation",
+      "chatgpt_api": "ChatGPT API Integration",
+      "ai_assisted": "AI Assisted Development"
+    }
+  },
+  "Experience": {
+    "title": "Professional Experience",
+    "present": "Present",
+    "semipresencial": "Hybrid",
+    "jobs": {
+      "adsdigital": {
+        "role": "Senior Full Stack Developer",
+        "company": "ADSDIGITAL (Remote)",
+        "desc1": "Designed and developed a <strong>reusable frontend framework with Next.js</strong> and a scalable backend with <strong>NestJS, Prisma and PostgreSQL</strong>, accelerating the launch of multiple SaaS products.",
+        "desc2": "Led the evolution of legacy products (such as the old <strong>CVCreator</strong> in WordPress) towards modern architectures, relaunching it as <link>Editor-CV</link> under the new Next.js/NestJS stack, migrating from monoliths to scalable services.",
+        "desc3": "Developed <link>Find-Persons</link>, integrating external APIs for real-time search and structuring of public people data.",
+        "desc4": "Implemented AI-based services like <link>AllRemoveBG</link> (AI background removal) and <link2>IQ-TestOnline</link2> (interactive intelligence tests), optimizing user experience and performance via microservices."
+      },
+      "nwc10": {
+        "role": "Full Stack Developer",
+        "company": "NWC10 (Hybrid)",
+        "desc1": "Collaborated on the <strong>comprehensive ticketing system</strong> for theaters in Madrid, covering everything from <strong>QR and barcode generation logic</strong> to integrating thermal printer drivers at points of sale.",
+        "desc2": "Implemented web experiences for high-end hospitality (e.g. Jade Restaurant), highlighting the creation of dynamic <strong>interactive menus</strong> for their commercial portal.",
+        "desc3": "Collaborated on the <link>Mucha Comida</link> project, integrating interactive maps with <strong>Leaflet</strong> for geolocation and advanced restaurant search, improving service usability."
+      },
+      "onepingpong": {
+        "role": "Full Stack Developer",
+        "company": "One PinPon (Hybrid)",
+        "desc1": "Assumed technical leadership at a critical stage, restructuring the development department to sustain campaign infrastructure for clients like <strong>Goya, Maizena and America</strong>.",
+        "desc2": "Created <strong>interactive web apps</strong> for digital advertising campaigns, optimizing engagement in the target audience for Latino food and textile products.",
+        "desc3": "Contributed to key projects that led the company to be awarded by the <strong>Latin Community Consortium</strong> as a leading digital advertising company (2015-2016)."
+      }
+    }
+  },
+  "Education": {
+    "title": "Education & Certifications",
+    "cert_official": "Official Certification",
+    "cert_title": "Professional Certificate IFCD0210",
+    "cert_desc": "Application Development with Web Technology",
+    "cert_inst": "San Roman Consulting and Training - 2014",
+    "languages_title": "Languages",
+    "languages_es": "Spanish: Native",
+    "languages_en": "English: Comprehensive (Spoken and Written)",
+    "languages_note": "English proficiency acquired during my residency in the United States, focusing on practical and conversational skills."
+  },
+  "Contact": {
+    "title": "Contact",
+    "description": "If you are interested in working with me or have any questions, do not hesitate to contact me through the following means:",
+    "footer_rights": "Haroldy Arturo Pérez Rodríguez. Senior Full Stack Developer."
+  }
+}
