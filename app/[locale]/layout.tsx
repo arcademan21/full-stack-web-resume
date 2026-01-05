@@ -1,29 +1,37 @@
 import type React from "react"
-import type { Metadata } from "next"
+import { NextIntlClientProvider } from 'next-intl';
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { getMessages } from 'next-intl/server';
+import { ThemeProvider } from "@/components/theme-provider"
+import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import "../globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-export const metadata: Metadata = {
-  title: "Tu Nombre - Senior Full Stack Developer | Next.js, React, NestJS",
-  description:
-    "Senior Full Stack Developer con +10 años de experiencia en Next.js, React, TypeScript y NestJS. Especializado en arquitecturas escalables y desarrollo web moderno.",
-  keywords: ["Full Stack Developer", "Senior Developer", "Next.js", "React", "NestJS", "TypeScript", "Node.js"],
-  authors: [{ name: "Tu Nombre" }],
-  generator: "v0.app",
-  icons: {
-    icon: "/favicon.svg",
-    apple: "/apple-icon.png",
-  },
+// Generate metadata for each locale.
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({locale, namespace: 'Metadata'});
+ 
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t('keywords').split(', '),
+    authors: [{ name: "Haroldy Arturo Pérez Rodríguez" }],
+    generator: "Next.js",
+    icons: {
+      icon: "/favicon.svg",
+      apple: "/apple-icon.png",
+    },
+  };
 }
-
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { ThemeProvider } from "@/components/theme-provider"
 
 export default async function RootLayout({
   children,

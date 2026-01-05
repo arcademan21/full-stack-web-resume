@@ -87,5 +87,10 @@
     "title": "Contact",
     "description": "If you are interested in working with me or have any questions, do not hesitate to contact me through the following means:",
     "footer_rights": "Haroldy Arturo Pérez Rodríguez. Senior Full Stack Developer."
+  },
+  "Metadata": {
+    "title": "Haroldy Arturo - Senior Full Stack Developer | Next.js, React, NestJS",
+    "description": "Senior Full Stack Developer with 10+ years of experience in Next.js, React, TypeScript and NestJS. Specialized in scalable architectures and modern web development.",
+    "keywords": "Full Stack Developer, Senior Developer, Next.js, React, NestJS, TypeScript, Node.js"
   }
 }
