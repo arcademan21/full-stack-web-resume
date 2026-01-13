@@ -13,16 +13,22 @@
   },
   "Hero": {
     "role": "Senior Full Stack Developer",
-    "description": "Desarrollador con más de 10 años de experiencia construyendo aplicaciones web escalables y arquitecturas robustas para empresas globales.",
+    "description": "Desarrollador con más de 10 años de experiencia construyendo aplicaciones web escalables y arquitecturas robustas.",
+    "highlight_experience": "10+ años",
+    "highlight_fullstack": "Full Stack",
+    "highlight_leadership": "Liderazgo técnico",
+    "highlight_ai": "AI & Automatización",
     "downloadCV": "Descarga mi CV",
     "downloadFormat": "Disponible en formato PDF y TXT",
     "downloadPDF": "Descargar PDF",
-    "downloadTXT": "Descargar TXT"
+    "downloadTXT": "Descargar TXT",
+    "loading": "Cargando..."
   },
   "About": {
     "title": "Resumen Profesional",
     "p1": "Senior Full Stack Developer con más de <strong>10 años de experiencia</strong> diseñando y desarrollando aplicaciones web escalables y de alto rendimiento. Especializado en arquitecturas modernas utilizando tecnologías de vanguardia.",
-    "p2": "Experto en AI Prompting Engineering e integración de herramientas de IA en el desarrollo. He liderado equipos técnicos en la construcción de soluciones empresariales complejas, implementando mejores prácticas de desarrollo y arquitecturas escalables que han servido a miles de usuarios.",
+    "p2": "<strong>Experto en AI Prompting Engineering</strong> e integración de herramientas de IA en el desarrollo. He liderado equipos técnicos en la construcción de soluciones empresariales complejas, implementando mejores prácticas de desarrollo y arquitecturas escalables que han servido a miles de usuarios.",
+    "p3": "Me caracterizo por una <strong>fuerte capacidad resolutiva</strong>, alto sentido de la <strong>responsabilidad y liderazgo colaborativo</strong>, trabajando en equipo con comunicación clara, proactividad y compromiso con la calidad.",
     "quote": "Mi extensa trayectoria me ha dotado de una solidez técnica que trasciende herramientas específicas. En el dinámico entorno actual, la adaptación a nuevos lenguajes y tecnologías no representa una barrera, sino una competencia natural en mi perfil que me permite aportar valor inmediato en cualquier ecosistema tecnológico."
   },
   "Skills": {
@@ -52,7 +58,7 @@
         "role": "Senior Full Stack Developer",
         "company": "ADSDIGITAL (Remoto)",
         "desc1": "Diseñé y desarrollé un <strong>framework frontend reutilizable con Next.js</strong> y un backend escalable con <strong>NestJS, Prisma y PostgreSQL</strong>, acelerando el lanzamiento de múltiples productos SaaS.",
-        "desc2": "Lideré la evolución de productos legacy (como el antiguo <strong>CVCreator</strong> en WordPress) hacia arquitecturas modernas, relanzándolo como <link>Editor-CV</link> bajo el nuevo stack de Next.js/NestJS, migrando de monolitos a servicios escalables.",
+        "desc2": "Lideré la evolución de productos legacy (como el antiguo <strong>CVCreator</strong>) hacia arquitecturas modernas, relanzándolo como <link>Editor-CV</link> bajo el nuevo stack de Next.js/NestJS, migrando de monolitos a servicios escalables.",
         "desc3": "Desarrollé <link>Find-Persons</link>, integrando APIs externas para la búsqueda y estructuración de datos públicos de personas en tiempo real.",
         "desc4": "Implementé servicios basados en IA como <link>AllRemoveBG</link> (eliminación de fondos con IA) y <link2>IQ-TestOnline</link2> (tests de inteligencia interactivos), optimizando la experiencia de usuario y el rendimiento mediante microservicios."
       },
@@ -60,7 +66,7 @@
         "role": "Full Stack Developer",
         "company": "NWC10 (Semipresencial)",
         "desc1": "Colaboré en el <strong>sistema integral de ticketería</strong> para teatros de Madrid, abarcando desde la lógica de generación de <strong>códigos QR y códigos de barras</strong> hasta la integración de controladores para impresoras térmicas en puntos de venta.",
-        "desc2": "Implementé experiencias web para hostelería de alta gama (ej. Restaurante Jade), destacando la creación de <strong>cartas interactivas</strong> dinámicas para su portal comercial.",
+        "desc2": "Implementé experiencias web para hostelería de alta gama, destacando la creación de <strong>cartas interactivas</strong> dinámicas para su portal comercial.",
         "desc3": "Colaboré en el proyecto <link>Mucha Comida</link>, integrando mapas interactivos con <strong>Leaflet</strong> para la geolocalización y búsqueda avanzada de restaurantes, mejorando la usabilidad del servicio."
       },
       "onepingpong": {
@@ -86,7 +92,10 @@
   "Contact": {
     "title": "Contacto",
     "description": "Si estás interesado en trabajar conmigo o tienes alguna pregunta, no dudes en ponerte en contacto a través de los siguientes medios:",
-    "footer_rights": "Haroldy Arturo Pérez Rodríguez. Senior Full Stack Developer."
+    "emailLabel": "Email",
+    "linkedinLabel": "LinkedIn",
+    "githubLabel": "GitHub",
+    "footer_rights": "Haroldy Arturo Pérez Rodríguez."
   },
   "Metadata": {
     "title": "Haroldy Arturo - Senior Full Stack Developer | Next.js, React, NestJS",

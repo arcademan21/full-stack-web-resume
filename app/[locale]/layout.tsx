@@ -1,31 +1,45 @@
-import type React from "react"
-import { NextIntlClientProvider } from 'next-intl';
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import { getMessages } from 'next-intl/server';
-import { ThemeProvider } from "@/components/theme-provider"
-import { getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import "../globals.css"
+import type React from "react";
+import { NextIntlClientProvider } from "next-intl";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { getMessages } from "next-intl/server";
+import { ThemeProvider } from "@/components/theme-provider";
+import { getTranslations } from "next-intl/server";
+import { locales } from "@/i18n";
+import { notFound } from "next/navigation";
+import "../globals.css";
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const _geist = Geist({ subsets: ["latin"] });
+const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 // Generate metadata for each locale.
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({locale, namespace: 'Metadata'});
- 
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  const title = t("title");
+  const description = t("description");
+
   return {
-    title: t('title'),
-    description: t('description'),
-    keywords: t('keywords').split(', '),
+    title,
+    description,
+    keywords: t("keywords").split(", "),
     authors: [{ name: "Haroldy Arturo Pérez Rodríguez" }],
     generator: "Next.js",
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
     icons: {
       icon: "/favicon.svg",
       apple: "/apple-icon.png",
@@ -35,7 +49,7 @@ export async function generateMetadata({
 
 export default async function RootLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -43,14 +57,14 @@ export default async function RootLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!['en', 'es'].includes(locale)) {
+  if (!locales.includes(locale)) {
     notFound();
   }
- 
+
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
- 
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`font-sans antialiased`}>

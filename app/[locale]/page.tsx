@@ -4,12 +4,13 @@ import dynamic from "next/dynamic";
 import HHKB3D from "@/components/hhkb-3d";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useState, useEffect } from "react";
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations, useMessages, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ResumePDF } from "@/components/ResumePDF";
+import CodeTyperBackground from "@/components/CodeTyperBackground";
 import {
   Github,
   Linkedin,
@@ -38,22 +39,29 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+// PDF Loading Component
+function PDFLoading() {
+  const t = useTranslations();
+  return (
+    <Button disabled className="gap-2">
+      <FileDown className="h-4 w-4" />
+      {t("Hero.loading")}
+    </Button>
+  );
+}
+
 // Dynamically import PDFDownloadLink to avoid SSR issues
 const PDFDownloadLink = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
   {
     ssr: false,
-    loading: () => (
-      <Button disabled className="gap-2">
-        <FileDown className="h-4 w-4" />
-        Loading...
-      </Button>
-    ),
+    loading: PDFLoading,
   }
 );
 
 export default function CVPage() {
   const t = useTranslations();
+  const locale = useLocale();
   const messages = useMessages() as any; // Access raw messages quite safely
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -85,10 +93,18 @@ export default function CVPage() {
       linkedin: "https://www.linkedin.com/in/haroldyarturo/",
       github: "https://github.com/ARCADEMAN21",
     },
+    contactSection: {
+      title: getRaw("Contact.title"),
+      description: getRaw("Contact.description"),
+      emailLabel: getRaw("Contact.emailLabel"),
+      linkedinLabel: getRaw("Contact.linkedinLabel"),
+      githubLabel: getRaw("Contact.githubLabel"),
+    },
     about: {
       title: getRaw("About.title"),
       p1: getRaw("About.p1"),
       p2: getRaw("About.p2"),
+      p3: getRaw("About.p3"),
     },
     experience: {
       title: getRaw("Experience.title"),
@@ -203,6 +219,7 @@ ${about.title.toUpperCase()}
 ${"-".repeat(about.title.length)}
 ${about.p1}
 ${about.p2}
+${about.p3 ? about.p3 : ""}
 
 ${experience.title.toUpperCase()}
 ${"-".repeat(experience.title.length)}
@@ -251,7 +268,7 @@ ${education.languages.en}
   return (
     <div className="relative min-h-screen bg-background">
       {/* Grid Background */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
       {/* Content */}
       <div className="relative z-10">
@@ -260,12 +277,12 @@ ${education.languages.en}
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center gap-8">
+              <div className="hidden lg:flex items-center gap-8">
                 <button
                   onClick={() =>
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }
-                  className="flex items-center justify-center p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group relative w-10 h-10"
+                  className="flex items-center justify-center p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group relative w-10 h-10 cursor-pointer"
                   aria-label="Scroll to top"
                 >
                   <Code className="w-6 h-6 text-primary transition-all scale-100 rotate-0 group-hover:scale-0 group-hover:rotate-90 absolute" />
@@ -277,19 +294,9 @@ ${education.languages.en}
                       .getElementById("about")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   {t("Navigation.about")}
-                </button>
-                <button
-                  onClick={() =>
-                    document
-                      .getElementById("experience")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {t("Navigation.experience")}
                 </button>
                 <button
                   onClick={() =>
@@ -297,9 +304,19 @@ ${education.languages.en}
                       .getElementById("skills")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   {t("Navigation.skills")}
+                </button>
+                <button
+                  onClick={() =>
+                    document
+                      .getElementById("experience")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                >
+                  {t("Navigation.experience")}
                 </button>
                 <button
                   onClick={() =>
@@ -307,7 +324,7 @@ ${education.languages.en}
                       .getElementById("education")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   {t("Navigation.education")}
                 </button>
@@ -317,21 +334,21 @@ ${education.languages.en}
                       .getElementById("contact")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   {t("Navigation.contact")}
                 </button>
               </div>
 
               {/* Mobile Navigation */}
-              <div className="flex md:hidden items-center">
+              <div className="flex lg:hidden items-center">
                 <Sheet
                   open={isMobileMenuOpen}
                   onOpenChange={setIsMobileMenuOpen}
                 >
                   <SheetTrigger asChild>
                     <button
-                      className="flex items-center justify-center p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group relative w-10 h-10"
+                      className="flex items-center justify-center p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors group relative w-10 h-10 cursor-pointer"
                       aria-label="Toggle menu"
                     >
                       <Code className="w-6 h-6 text-primary transition-all scale-100 rotate-0 group-hover:scale-0 group-hover:rotate-90 absolute" />
@@ -341,16 +358,16 @@ ${education.languages.en}
                   <SheetContent
                     side="left"
                     hideClose
-                    className="border-r border-border/40 w-[85vw] sm:w-[350px] bg-background"
+                    className="border-r border-border/40 w-[50vw] sm:w-[350px] bg-background"
                   >
                     {/* Reverse Grid Background */}
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_top,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none -z-10 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_top,#4f4f4f2e_1px,transparent_1px)] bg-[size:18px_24px] pointer-events-none -z-10 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
 
                     <SheetHeader>
                       <SheetTitle className="text-left font-bold">
                         <button
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="flex items-center justify-center p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors w-10 h-10"
+                          className="flex items-center justify-center p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors w-10 h-10 cursor-pointer"
                         >
                           <Code2 className="w-6 h-6 text-primary" />
                         </button>
@@ -364,22 +381,10 @@ ${education.languages.en}
                             ?.scrollIntoView({ behavior: "smooth" });
                           setIsMobileMenuOpen(false);
                         }}
-                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
+                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"
                       >
                         <User className="w-6 h-6" />
                         {t("Navigation.about")}
-                      </button>
-                      <button
-                        onClick={() => {
-                          document
-                            .getElementById("experience")
-                            ?.scrollIntoView({ behavior: "smooth" });
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
-                      >
-                        <Briefcase className="w-6 h-6" />
-                        {t("Navigation.experience")}
                       </button>
                       <button
                         onClick={() => {
@@ -388,10 +393,22 @@ ${education.languages.en}
                             ?.scrollIntoView({ behavior: "smooth" });
                           setIsMobileMenuOpen(false);
                         }}
-                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
+                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"
                       >
                         <Bot className="w-6 h-6" />
                         {t("Navigation.skills")}
+                      </button>
+                      <button
+                        onClick={() => {
+                          document
+                            .getElementById("experience")
+                            ?.scrollIntoView({ behavior: "smooth" });
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"
+                      >
+                        <Briefcase className="w-6 h-6" />
+                        {t("Navigation.experience")}
                       </button>
                       <button
                         onClick={() => {
@@ -400,7 +417,7 @@ ${education.languages.en}
                             ?.scrollIntoView({ behavior: "smooth" });
                           setIsMobileMenuOpen(false);
                         }}
-                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
+                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"
                       >
                         <GraduationCap className="w-6 h-6" />
                         {t("Navigation.education")}
@@ -412,7 +429,7 @@ ${education.languages.en}
                             ?.scrollIntoView({ behavior: "smooth" });
                           setIsMobileMenuOpen(false);
                         }}
-                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
+                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"
                       >
                         <Mail className="w-6 h-6" />
                         {t("Navigation.contact")}
@@ -430,21 +447,33 @@ ${education.languages.en}
         </nav>
 
         {/* Hero Section */}
-        <header className="container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+        <header className="container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 min-h-screen grid content-center">
           <div className="max-w-7xl">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12 lg:gap-16 mb-6">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-16 mb-6">
               <div className="flex-1">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-balance mb-4">
+                <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-balance mb-4">
                   Haroldy Arturo Pérez Rodríguez
                 </h1>
-                <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
+                <p className="text-xl sm:text-2xl text-primary font-medium">
                   {t("Hero.role")}
                 </p>
+                <div className="flex flex-wrap items-center gap-2 mt-4">
+                  <Badge variant="secondary">
+                    {t("Hero.highlight_experience")}
+                  </Badge>
+                  <Badge variant="secondary">
+                    {t("Hero.highlight_fullstack")}
+                  </Badge>
+                  <Badge variant="secondary">
+                    {t("Hero.highlight_leadership")}
+                  </Badge>
+                  <Badge variant="secondary">{t("Hero.highlight_ai")}</Badge>
+                </div>
               </div>
 
               {/* Photo Placeholder */}
               {/* 3D HHKB */}
-              <div className="relative w-full h-64 md:h-72 md:w-full max-w-[500px] flex items-center justify-center -my-8 md:-my-0 md:ml-auto">
+              <div className="relative w-full h-64 sm:h-72 lg:h-72 lg:w-full max-w-md lg:max-w-[500px] flex items-center justify-center -my-8 lg:my-0 lg:ml-auto">
                 <HHKB3D />
               </div>
             </div>
@@ -455,7 +484,7 @@ ${education.languages.en}
 
             {/* Social Links */}
             <div className="flex flex-wrap items-center gap-4 mb-12">
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="sm" asChild>
                 <a
                   href="https://github.com/ARCADEMAN21"
                   target="_blank"
@@ -466,7 +495,7 @@ ${education.languages.en}
                   GitHub
                 </a>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="sm" asChild>
                 <a
                   href="https://www.linkedin.com/in/haroldyarturo/"
                   target="_blank"
@@ -477,7 +506,7 @@ ${education.languages.en}
                   LinkedIn
                 </a>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="sm" asChild>
                 <a href="mailto:haroldyarturo@gmail.com" className="gap-2">
                   <Mail className="h-5 w-5" />
                   Email
@@ -498,20 +527,21 @@ ${education.languages.en}
                 </div>
                 <div className="flex gap-3">
                   {isClient ? (
-                    <PDFDownloadLink
-                      document={<ResumePDF data={resumeData} />}
-                      fileName="CV_Haroldy_Arturo_Perez_Rodriguez.pdf"
-                      className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-                    >
-                      {({ blob, url, loading, error }) => (
-                        <>
-                          <FileDown className="h-4 w-4 mr-2" />
-                          {loading ? "Generating..." : t("Hero.downloadPDF")}
-                        </>
-                      )}
-                    </PDFDownloadLink>
+                    <Button size="lg" className="gap-2" asChild>
+                      <PDFDownloadLink
+                        document={<ResumePDF data={resumeData} />}
+                        fileName="CV_Haroldy_Arturo_Perez_Rodriguez.pdf"
+                      >
+                        {({ loading }) => (
+                          <>
+                            <FileDown className="h-4 w-4" />
+                            {loading ? "Generating..." : t("Hero.downloadPDF")}
+                          </>
+                        )}
+                      </PDFDownloadLink>
+                    </Button>
                   ) : (
-                    <Button disabled className="gap-2">
+                    <Button size="lg" disabled className="gap-2">
                       <FileDown className="h-4 w-4" />
                       {t("Hero.downloadPDF")}
                     </Button>
@@ -519,7 +549,8 @@ ${education.languages.en}
                   <Button
                     onClick={handleDownloadTXT}
                     variant="outline"
-                    className="gap-2 bg-transparent"
+                    size="lg"
+                    className="gap-2 bg-transparent cursor-pointer"
                   >
                     <FileText className="h-4 w-4" />
                     {t("Hero.downloadTXT")}
@@ -533,11 +564,11 @@ ${education.languages.en}
         {/* About Section */}
         <section
           id="about"
-          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen grid content-center"
         >
           <div className="max-w-7xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
-              <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+              <div className="flex flex-col gap-6 self-baseline">
                 <h2 className="text-3xl sm:text-4xl font-bold">
                   {t("About.title")}
                 </h2>
@@ -552,16 +583,37 @@ ${education.languages.en}
                     })}
                   </p>
                   <p className="text-muted-foreground leading-relaxed mt-4">
-                    {t("About.p2")}
+                    {t.rich("About.p2", {
+                      strong: (chunks) => (
+                        <strong className="text-foreground font-bold">
+                          {chunks}
+                        </strong>
+                      ),
+                    })}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mt-4">
+                    {t.rich("About.p3", {
+                      strong: (chunks) => (
+                        <strong className="text-foreground font-bold">
+                          {chunks}
+                        </strong>
+                      ),
+                    })}
                   </p>
                 </div>
               </div>
-              <div className="relative flex justify-center md:justify-start">
+              <div className="relative flex justify-center lg:justify-start">
                 <div className="relative w-full max-w-2xl aspect-square overflow-hidden">
+                  <div className="absolute inset-0">
+                    <CodeTyperBackground
+                      locale={locale}
+                      className="absolute inset-0 p-6 sm:p-8"
+                    />
+                  </div>
                   <img
                     src="/dev-profile.png"
                     alt="Haroldy Arturo Pérez Rodríguez"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)]"
+                    className="relative z-10 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)] opacity-95"
                   />
                 </div>
               </div>
@@ -572,7 +624,7 @@ ${education.languages.en}
         {/* Skills Section */}
         <section
           id="skills"
-          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen grid content-center"
         >
           <div className="max-w-7xl">
             <h2 className="text-3xl sm:text-4xl font-bold mb-12">
@@ -581,7 +633,7 @@ ${education.languages.en}
 
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {/* Frontend */}
-              <Card className="p-6 hover:border-foreground/20 transition-colors">
+              <Card className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-secondary rounded-lg">
                     <LayoutTemplate className="h-6 w-6 text-foreground" />
@@ -602,19 +654,19 @@ ${education.languages.en}
 
               {/* Backend */}
               {/* Backend */}
-              <Card className="p-6 hover:border-foreground/20 transition-colors">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
+              <Card className="p-6">
+                <div className="flex items-start justify-between gap-3 flex-wrap mb-4">
+                  <div className="flex items-center gap-3 min-w-0">
                     <div className="p-2 bg-secondary rounded-lg">
                       <Server className="h-6 w-6 text-foreground" />
                     </div>
-                    <h3 className="text-xl font-semibold">
+                    <h3 className="text-xl font-semibold leading-tight min-w-0">
                       {t("Skills.backend")}
                     </h3>
                   </div>
                   <Badge
                     variant="secondary"
-                    className="text-xs bg-blue-500/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-200 hover:bg-blue-500/20 dark:hover:bg-blue-500/30 border-blue-500/30 border"
+                    className="shrink-0 whitespace-nowrap text-[10px] sm:text-xs bg-blue-500/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-200 hover:bg-blue-500/20 dark:hover:bg-blue-500/30 border-blue-500/30 border"
                   >
                     {t("Skills.specialty")}
                   </Badge>
@@ -630,19 +682,19 @@ ${education.languages.en}
 
               {/* AI & Automation */}
               {/* AI & Automation */}
-              <Card className="p-6 hover:border-foreground/20 transition-colors">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
+              <Card className="p-6">
+                <div className="flex items-start justify-between gap-3 flex-wrap mb-4">
+                  <div className="flex items-center gap-3 min-w-0">
                     <div className="p-2 bg-secondary rounded-lg">
                       <Bot className="h-6 w-6 text-foreground" />
                     </div>
-                    <h3 className="text-xl font-semibold">
+                    <h3 className="text-xl font-semibold leading-tight min-w-0">
                       {t("Skills.ai_automation")}
                     </h3>
                   </div>
                   <Badge
                     variant="secondary"
-                    className="text-xs bg-blue-500/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-200 hover:bg-blue-500/20 dark:hover:bg-blue-500/30 border-blue-500/30 border"
+                    className="shrink-0 whitespace-nowrap text-[10px] sm:text-xs bg-blue-500/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-200 hover:bg-blue-500/20 dark:hover:bg-blue-500/30 border-blue-500/30 border"
                   >
                     {t("Skills.highlight")}
                   </Badge>
@@ -668,7 +720,7 @@ ${education.languages.en}
 
               {/* Database */}
               {/* Database */}
-              <Card className="p-6 hover:border-foreground/20 transition-colors">
+              <Card className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-secondary rounded-lg">
                     <Database className="h-6 w-6 text-foreground" />
@@ -685,7 +737,7 @@ ${education.languages.en}
 
               {/* Infrastructure */}
               {/* Infrastructure */}
-              <Card className="p-6 hover:border-foreground/20 transition-colors">
+              <Card className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-secondary rounded-lg">
                     <Cloud className="h-6 w-6 text-foreground" />
@@ -707,7 +759,7 @@ ${education.languages.en}
               </Card>
 
               {/* LAMP Stack */}
-              <Card className="p-6 hover:border-foreground/20 transition-colors">
+              <Card className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-secondary rounded-lg">
                     <History className="h-6 w-6 text-foreground" />
@@ -744,7 +796,7 @@ ${education.languages.en}
         {/* Experience Section */}
         <section
           id="experience"
-          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen grid content-center"
         >
           <div className="max-w-7xl">
             <h2 className="text-3xl sm:text-4xl font-bold mb-12">
@@ -765,7 +817,7 @@ ${education.languages.en}
                       2018 - {t("Experience.present")}
                     </span>
                   </div>
-                  <p className="text-primary font-medium">
+                  <p className="text-muted-foreground font-medium">
                     {t("Experience.jobs.adsdigital.company")}
                   </p>
                 </div>
@@ -875,7 +927,7 @@ ${education.languages.en}
                       2015 - 2016
                     </span>
                   </div>
-                  <p className="text-primary font-medium">
+                  <p className="text-muted-foreground font-medium">
                     {t("Experience.jobs.nwc10.company")}
                   </p>
                 </div>
@@ -943,7 +995,7 @@ ${education.languages.en}
                       2014 - 2015
                     </span>
                   </div>
-                  <p className="text-primary font-medium">
+                  <p className="text-muted-foreground font-medium">
                     {t("Experience.jobs.onepingpong.company")}
                   </p>
                 </div>
@@ -995,16 +1047,16 @@ ${education.languages.en}
         {/* Education & Certifications */}
         <section
           id="education"
-          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen grid content-center"
         >
           <div className="max-w-7xl">
             <h2 className="text-3xl sm:text-4xl font-bold mb-12">
               {t("Education.title")}
             </h2>
 
-            <div className="max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Certification - Highlighted */}
-              <Card className="p-6 border-blue-500/30 bg-blue-500/5 hover:border-blue-500/50 transition-colors">
+              <Card className="p-6 border-blue-500/30 bg-blue-500/5">
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
                     <svg
@@ -1022,7 +1074,7 @@ ${education.languages.en}
                     </svg>
                   </div>
                   <div className="space-y-2">
-                    <Badge className="bg-blue-500 hover:bg-blue-600 text-white mb-2">
+                    <Badge className="bg-blue-500 text-white mb-2">
                       {t("Education.cert_official")}
                     </Badge>
                     <h3 className="text-xl font-bold">
@@ -1039,7 +1091,7 @@ ${education.languages.en}
               </Card>
 
               {/* Languages */}
-              <Card className="p-6 hover:border-foreground/20 transition-colors">
+              <Card className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-secondary">
                     <Languages className="w-6 h-6 text-foreground" />
@@ -1069,7 +1121,7 @@ ${education.languages.en}
         {/* Contact Section */}
         <section
           id="contact"
-          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-32"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-32 min-h-screen grid content-center"
         >
           <div className="max-w-4xl">
             <h2 className="text-3xl sm:text-4xl font-bold mb-8">
@@ -1094,7 +1146,7 @@ ${education.languages.en}
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Linkedin className="h-5 w-5" />
-                  <span className="text-lg">LinkedIn</span>
+                  <span className="text-lg">linkedin.com/in/haroldyarturo</span>
                 </a>
               </div>
             </div>
