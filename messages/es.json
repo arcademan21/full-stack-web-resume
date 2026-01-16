@@ -23,7 +23,8 @@
     "downloadFormat": "Disponible en formato PDF y TXT",
     "downloadPDF": "Descargar PDF",
     "downloadTXT": "Descargar TXT",
-    "loading": "Cargando..."
+    "loading": "Cargando...",
+    "brand_phrase": "Aunque mi nombre es <bold>Haroldy Arturo</bold>, mis amigos encuentran a <harold>Harold</harold>, el espíritu libre y cercano. Pero ante el desafío profesional, quien toma el control es <arturo>Arturo</arturo>, la mente seria y estructurada."
   },
   "About": {
     "title": "Resumen Profesional",
@@ -93,7 +94,7 @@
   "Contact": {
     "title": "Contacto",
     "description": "¿Estás interesado? Ponte en contacto conmigo, estoy disponible desde las 8:00 hasta las 20:00 horas, horario de España.",
-    "email_alternative": "Si lo prefieres puedes enviar un correo a haroldyarturo@gmail.com, lo atenderé con la mayor brevedad.",
+    "email_alternative": "Si lo prefieres puedes enviar un correo a haroldyarturo@gmail.com, atenderé con la mayor brevedad.",
     "emailLabel": "Email",
     "linkedinLabel": "LinkedIn",
     "githubLabel": "GitHub",

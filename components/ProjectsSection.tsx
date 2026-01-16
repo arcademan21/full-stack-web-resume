@@ -146,11 +146,9 @@ export function ProjectsSection({ locale }: { locale: string }) {
       id="projects"
       className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen grid content-center"
     >
-      <div className="max-w-[28rem] lg:max-w-7xl w-full">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            {t("title")}
-          </h2>
+      <div className="max-w-[28rem] lg:max-w-7xl w-full min-h-160">
+        <div className="flex flex-col space-y-4  mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold">{t("title")}</h2>
         </div>
 
         <Carousel setApi={setApi} className="w-full">
@@ -191,7 +189,7 @@ export function ProjectsSection({ locale }: { locale: string }) {
 
                       {/* Project Images (Right) */}
                       <div className="order-1 lg:order-2">
-                        <div className="relative aspect-video rounded-xl overflow-hidden bg-transparent mask-[linear-gradient(to_bottom,black_90%,transparent_100%)]">
+                        <div className="relative aspect-video overflow-hidden bg-transparent mask-[linear-gradient(to_bottom,black_90%,transparent_100%)]">
                           <div className="w-full h-full mask-[linear-gradient(to_right,black_90%,transparent_100%)]">
                             <ProjectImageCarousel
                               project={project}

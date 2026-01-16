@@ -199,12 +199,6 @@ export const GameOfLifeGrid = () => {
 
       const newCols = Math.ceil(rect.width / CELL_WIDTH);
       const newRows = Math.ceil(rect.height / CELL_HEIGHT);
-      console.log("Game of Life: Canvas initialized", {
-        width: rect.width,
-        height: rect.height,
-        cols: newCols,
-        rows: newRows,
-      });
 
       initGrid(rect.width, rect.height, true);
     };
@@ -233,8 +227,6 @@ export const GameOfLifeGrid = () => {
     const { cols, grid } = stateRef.current;
 
     const idx = row * cols + col;
-    // Log interaction
-    // console.log("Interaction at:", { col, row });
 
     if (idx >= 0 && idx < grid.length) {
       // revive cell if dead, keep alive if alive (drawing mode)
