@@ -105,7 +105,10 @@
     "form_email_placeholder": "you@email.com",
     "form_message": "Message",
     "form_message_placeholder": "Write your message here...",
-    "form_submit": "Send Message"
+    "form_submit": "Send Message",
+    "form_sending": "Sending message...",
+    "form_success": "Message sent successfully!",
+    "form_error": "There was an error sending the message."
   },
   "Metadata": {
     "title": "Haroldy Arturo - Senior Full Stack Developer | Next.js, React, NestJS",

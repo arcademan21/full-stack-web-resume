@@ -1,5 +1,8 @@
 "use client";
 
+import { sendEmail } from "@/actions/send-email";
+import { toast } from "sonner";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -40,11 +43,24 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Here you would typically send the data to your backend
-    console.log(values);
-    // For now, we can just alert or toast
-    alert(JSON.stringify(values, null, 2));
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("message", values.message);
+
+    const promise = sendEmail(null, formData);
+
+    toast.promise(promise, {
+      loading: t("form_sending"),
+      success: t("form_success"),
+      error: t("form_error"),
+    });
+
+    const result = await promise;
+    if (result?.success) {
+      form.reset();
+    }
   }
 
   return (

@@ -105,7 +105,10 @@
     "form_email_placeholder": "tu@email.com",
     "form_message": "Mensaje",
     "form_message_placeholder": "Escribe tu mensaje aquí...",
-    "form_submit": "Enviar Mensaje"
+    "form_submit": "Enviar Mensaje",
+    "form_sending": "Enviando mensaje...",
+    "form_success": "¡Mensaje enviado correctamente!",
+    "form_error": "Hubo un error al enviar el mensaje."
   },
   "Metadata": {
     "title": "Haroldy Arturo - Senior Full Stack Developer | Next.js, React, NestJS",

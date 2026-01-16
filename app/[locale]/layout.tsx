@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { getTranslations } from "next-intl/server";
 import { locales } from "@/i18n";
 import { notFound } from "next/navigation";
+import { Toaster } from "@/components/ui/sonner";
 import "../globals.css";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -78,6 +79,7 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
+        <Toaster />
         <Analytics />
       </body>
     </html>
