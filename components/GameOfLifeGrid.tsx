@@ -275,7 +275,7 @@ export const GameOfLifeGrid = () => {
       onTouchStart={(e) =>
         handleInteraction(e.touches[0].clientX, e.touches[0].clientY)
       }
-      className="fixed inset-0 top-16 w-full h-[calc(100vh-64px)] z-0 cursor-crosshair opacity-60"
+      className="fixed inset-0 top-16 w-full h-[calc(100vh-64px)] z-0 cursor-crosshair opacity-60 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
     />
   );
 };
