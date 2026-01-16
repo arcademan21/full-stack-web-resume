@@ -108,7 +108,7 @@ export const HeroSection = ({ resumeData }: HeroSectionProps) => {
                 </Button>
               </div>
 
-              <Card className="p-6 bg-accent/50 border-accent w-auto sm:w-full max-w-2xl">
+              <Card className="p-4 sm:p-6 bg-accent/50 border-accent w-full max-w-[calc(100vw-3rem)] sm:max-w-2xl">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
                     <h3 className="text-lg font-semibold mb-1">
@@ -118,7 +118,7 @@ export const HeroSection = ({ resumeData }: HeroSectionProps) => {
                       {t("Hero.downloadFormat")}
                     </p>
                   </div>
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-3">
                     {isClient ? (
                       <Button size="lg" className="gap-2" asChild>
                         <PDFDownloadLink
