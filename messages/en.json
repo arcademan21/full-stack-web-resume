@@ -4,6 +4,7 @@
     "experience": "Experience",
     "skills": "Skills",
     "education": "Education",
+    "projects": "Projects",
     "contact": "Contact"
   },
   "NotFound": {
@@ -91,15 +92,73 @@
   },
   "Contact": {
     "title": "Contact",
-    "description": "If you are interested in working with me or have any questions, do not hesitate to contact me through the following means:",
+    "description": "Interested? Get in touch with me, I'm available from 8:00 to 20:00, Spain time.",
+    "email_alternative": "If you prefer, you can send me an email at haroldyarturo@gmail.com, I will answer as soon as possible.",
     "emailLabel": "Email",
     "linkedinLabel": "LinkedIn",
     "githubLabel": "GitHub",
-    "footer_rights": "Haroldy Arturo Pérez Rodríguez."
+    "footer_rights": "Haroldy Arturo Pérez Rodríguez.",
+    "form_name": "Name",
+    "form_name_placeholder": "Your name",
+    "form_email": "Email",
+    "form_email_placeholder": "you@email.com",
+    "form_message": "Message",
+    "form_message_placeholder": "Write your message here...",
+    "form_submit": "Send Message"
   },
   "Metadata": {
     "title": "Haroldy Arturo - Senior Full Stack Developer | Next.js, React, NestJS",
     "description": "Senior Full Stack Developer with 10+ years of experience in Next.js, React, TypeScript and NestJS. Specialized in scalable architectures and modern web development.",
     "keywords": "Full Stack Developer, Senior Developer, Next.js, React, NestJS, TypeScript, Node.js"
+  },
+  "Projects": {
+    "title": "Featured Projects",
+    "editor_cv": {
+      "title": "Editor-CV",
+      "role": "Senior Full Stack Developer",
+      "description": "Originally a legacy product (CVCreator), I led the complete modernization and re-launch as Editor-CV. We migrated from a monolithic architecture to a scalable microservices ecosystem using Next.js and NestJS. This transformation enhanced performance, user experience, and allowed for rapid deployment of new features in a SaaS environment.",
+      "tags": {
+        "0": "Next.js",
+        "1": "NestJS",
+        "2": "PostgreSQL",
+        "3": "Prisma",
+        "4": "Integrated AI"
+      },
+      "link": "Editor-CV"
+    },
+    "find_persons": {
+      "title": "Find-Persons",
+      "role": "Senior Full Stack Developer",
+      "description": "Developed a real-time people search platform integrating public data APIs. Focused on high-performance data structuring and user-friendly interface for public record accessibility.",
+      "tags": {
+        "0": "React",
+        "1": "Node.js",
+        "2": "External APIs",
+        "3": "Public Data"
+      },
+      "link": "Find-Persons"
+    },
+    "all_remove_bg": {
+      "title": "AllRemoveBG",
+      "role": "Senior Full Stack Developer",
+      "description": "AI-powered application for automatic image background removal. Implements advanced computer vision algorithms to process images in real-time with high precision.",
+      "tags": {
+        "0": "Next.js",
+        "1": "Image Editing"
+      },
+      "link": "AllRemoveBG"
+    },
+    "iq_test_online": {
+      "title": "IQ-TestOnline",
+      "role": "Senior Full Stack Developer",
+      "description": "Platform for interactive intelligence tests. Built with a scalable microservices architecture to handle high traffic and provide real-time results and analytics.",
+      "tags": {
+        "0": "Next.js",
+        "1": "Microservices",
+        "2": "Analytics",
+        "3": "Psychometrics"
+      },
+      "link": "IQ-TestOnline"
+    }
   }
 }

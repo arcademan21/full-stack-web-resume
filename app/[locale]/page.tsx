@@ -11,6 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ResumePDF } from "@/components/ResumePDF";
 import CodeTyperBackground from "@/components/CodeTyperBackground";
+import { ProjectsSection } from "@/components/ProjectsSection";
+import { GameOfLifeGrid } from "@/components/GameOfLifeGrid";
 import {
   Github,
   Linkedin,
@@ -30,6 +32,8 @@ import {
   Briefcase,
   GraduationCap,
   Languages,
+  Send,
+  Phone,
 } from "lucide-react";
 import {
   Sheet,
@@ -38,6 +42,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useSectionStepperScroll } from "@/hooks/useSectionStepperScroll";
 
 // PDF Loading Component
 function PDFLoading() {
@@ -59,6 +64,8 @@ const PDFDownloadLink = dynamic(
   }
 );
 
+import { ContactForm } from "@/components/ContactForm";
+
 export default function CVPage() {
   const t = useTranslations();
   const locale = useLocale();
@@ -69,6 +76,13 @@ export default function CVPage() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useSectionStepperScroll({
+    selector: "section",
+    topOffsetSelector: "header",
+    lockMs: 650,
+    excludedIds: ["experience"],
+  });
 
   // Helper to safely get message and strip HTML for PDF
   const getRaw = (key: string) => {
@@ -267,8 +281,11 @@ ${education.languages.en}
 
   return (
     <div className="relative min-h-screen bg-background">
+      {/* Game of Life Background */}
+      <GameOfLifeGrid />
+
       {/* Grid Background */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:18px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:18px_24px] bg-position-[0px_16px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
       {/* Content */}
       <div className="relative z-10">
@@ -297,6 +314,16 @@ ${education.languages.en}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   {t("Navigation.about")}
+                </button>
+                <button
+                  onClick={() =>
+                    document
+                      .getElementById("projects")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                >
+                  {t("Navigation.projects")}
                 </button>
                 <button
                   onClick={() =>
@@ -389,6 +416,18 @@ ${education.languages.en}
                       <button
                         onClick={() => {
                           document
+                            .getElementById("projects")
+                            ?.scrollIntoView({ behavior: "smooth" });
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="flex items-center gap-4 text-2xl font-medium text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"
+                      >
+                        <LayoutTemplate className="w-6 h-6" />
+                        {t("Navigation.projects")}
+                      </button>
+                      <button
+                        onClick={() => {
+                          document
                             .getElementById("skills")
                             ?.scrollIntoView({ behavior: "smooth" });
                           setIsMobileMenuOpen(false);
@@ -449,7 +488,7 @@ ${education.languages.en}
         {/* Hero Section */}
         <header className="container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 min-h-screen grid content-center">
           <div className="max-w-7xl">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-16 mb-6">
+            <div className="flex flex-col lg:flex-row items-start lg:items-start justify-between gap-10 lg:gap-16 mb-6">
               <div className="flex-1">
                 <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-balance mb-4">
                   Haroldy Arturo Pérez Rodríguez
@@ -457,7 +496,7 @@ ${education.languages.en}
                 <p className="text-xl sm:text-2xl text-primary font-medium">
                   {t("Hero.role")}
                 </p>
-                <div className="flex flex-wrap items-center gap-2 mt-4">
+                <div className="flex flex-wrap items-center gap-2 mt-4 mb-6">
                   <Badge variant="secondary">
                     {t("Hero.highlight_experience")}
                   </Badge>
@@ -469,95 +508,111 @@ ${education.languages.en}
                   </Badge>
                   <Badge variant="secondary">{t("Hero.highlight_ai")}</Badge>
                 </div>
+
+                <div className="flex flex-wrap items-center gap-2 mb-6">
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+                    {t("Hero.description")}
+                  </p>
+
+                  {/* Social Links */}
+                  <div className="flex flex-wrap items-center gap-4 mb-8">
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href="https://www.linkedin.com/in/haroldyarturo/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="gap-2"
+                      >
+                        <Linkedin className="h-5 w-5" />
+                        LinkedIn
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href="mailto:haroldyarturo@gmail.com"
+                        className="gap-2"
+                      >
+                        <Mail className="h-5 w-5" />
+                        Email
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href="https://github.com/ARCADEMAN21"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="gap-2"
+                      >
+                        <Github className="h-5 w-5" />
+                        GitHub
+                      </a>
+                    </Button>
+                  </div>
+
+                  <Card className="p-6 bg-accent/50 border-accent w-full max-w-2xl">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-1">
+                          {t("Hero.downloadCV")}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">
+                          {t("Hero.downloadFormat")}
+                        </p>
+                      </div>
+                      <div className="flex gap-3">
+                        {isClient ? (
+                          <Button size="lg" className="gap-2" asChild>
+                            <PDFDownloadLink
+                              document={<ResumePDF data={resumeData} />}
+                              fileName="CV_Haroldy_Arturo_Perez_Rodriguez.pdf"
+                            >
+                              {({ loading }) => (
+                                <>
+                                  <FileDown className="h-4 w-4" />
+                                  {loading
+                                    ? "Generating..."
+                                    : t("Hero.downloadPDF")}
+                                </>
+                              )}
+                            </PDFDownloadLink>
+                          </Button>
+                        ) : (
+                          <Button size="lg" disabled className="gap-2">
+                            <FileDown className="h-4 w-4" />
+                            {t("Hero.downloadPDF")}
+                          </Button>
+                        )}
+                        <Button
+                          onClick={handleDownloadTXT}
+                          variant="outline"
+                          size="lg"
+                          className="gap-2 bg-transparent cursor-pointer"
+                        >
+                          <FileText className="h-4 w-4" />
+                          {t("Hero.downloadTXT")}
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
               </div>
 
               {/* Photo Placeholder */}
               {/* 3D HHKB */}
-              <div className="relative w-full h-64 sm:h-72 lg:h-72 lg:w-full max-w-md lg:max-w-[500px] flex items-center justify-center -my-8 lg:my-0 lg:ml-auto">
-                <HHKB3D />
+              <div className="relative w-full max-w-md lg:max-w-[500px] aspect-square overflow-hidden lg:ml-auto -my-8 lg:my-0 rounded-2xl">
+                <div className="absolute inset-0">
+                  <CodeTyperBackground
+                    locale={locale}
+                    className="absolute inset-0 p-6 sm:p-8"
+                  />
+                </div>
+                <img
+                  src="/dev-profile.png"
+                  alt="Haroldy Arturo Pérez Rodríguez"
+                  className="relative z-10 w-full h-full object-cover transition-all duration-500 mask-[linear-gradient(to_bottom,black_50%,transparent_100%)] opacity-95"
+                />
               </div>
             </div>
-
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-              {t("Hero.description")}
-            </p>
-
-            {/* Social Links */}
-            <div className="flex flex-wrap items-center gap-4 mb-12">
-              <Button variant="outline" size="sm" asChild>
-                <a
-                  href="https://github.com/ARCADEMAN21"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="gap-2"
-                >
-                  <Github className="h-5 w-5" />
-                  GitHub
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a
-                  href="https://www.linkedin.com/in/haroldyarturo/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="gap-2"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  LinkedIn
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href="mailto:haroldyarturo@gmail.com" className="gap-2">
-                  <Mail className="h-5 w-5" />
-                  Email
-                </a>
-              </Button>
-            </div>
-
-            {/* Download Section */}
-            <Card className="p-6 bg-accent/50 border-accent max-w-2xl">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">
-                    {t("Hero.downloadCV")}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t("Hero.downloadFormat")}
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  {isClient ? (
-                    <Button size="lg" className="gap-2" asChild>
-                      <PDFDownloadLink
-                        document={<ResumePDF data={resumeData} />}
-                        fileName="CV_Haroldy_Arturo_Perez_Rodriguez.pdf"
-                      >
-                        {({ loading }) => (
-                          <>
-                            <FileDown className="h-4 w-4" />
-                            {loading ? "Generating..." : t("Hero.downloadPDF")}
-                          </>
-                        )}
-                      </PDFDownloadLink>
-                    </Button>
-                  ) : (
-                    <Button size="lg" disabled className="gap-2">
-                      <FileDown className="h-4 w-4" />
-                      {t("Hero.downloadPDF")}
-                    </Button>
-                  )}
-                  <Button
-                    onClick={handleDownloadTXT}
-                    variant="outline"
-                    size="lg"
-                    className="gap-2 bg-transparent cursor-pointer"
-                  >
-                    <FileText className="h-4 w-4" />
-                    {t("Hero.downloadTXT")}
-                  </Button>
-                </div>
-              </div>
-            </Card>
           </div>
         </header>
 
@@ -602,24 +657,15 @@ ${education.languages.en}
                   </p>
                 </div>
               </div>
-              <div className="relative flex justify-center lg:justify-start">
-                <div className="relative w-full max-w-2xl aspect-square overflow-hidden">
-                  <div className="absolute inset-0">
-                    <CodeTyperBackground
-                      locale={locale}
-                      className="absolute inset-0 p-6 sm:p-8"
-                    />
-                  </div>
-                  <img
-                    src="/dev-profile.png"
-                    alt="Haroldy Arturo Pérez Rodríguez"
-                    className="relative z-10 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)] opacity-95"
-                  />
-                </div>
+              <div className="relative flex justify-center lg:justify-start w-full h-64 sm:h-80 lg:h-96">
+                <HHKB3D />
               </div>
             </div>
           </div>
         </section>
+
+        {/* Projects Section */}
+        <ProjectsSection locale={locale} />
 
         {/* Skills Section */}
         <section
@@ -1044,7 +1090,6 @@ ${education.languages.en}
         </section>
 
         {/* Education & Certifications */}
-        {/* Education & Certifications */}
         <section
           id="education"
           className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen grid content-center"
@@ -1123,32 +1168,37 @@ ${education.languages.en}
           id="contact"
           className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-32 min-h-screen grid content-center"
         >
-          <div className="max-w-4xl">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-8">
-              {t("Contact.title")}
-            </h2>
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-muted-foreground leading-relaxed">
-                {t("Contact.description")}
-              </p>
-              <div className="flex flex-col gap-4 mt-8">
-                <a
-                  href="mailto:haroldyarturo@gmail.com"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Mail className="h-5 w-5" />
-                  <span className="text-lg">haroldyarturo@gmail.com</span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/haroldyarturo/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  <span className="text-lg">linkedin.com/in/haroldyarturo</span>
-                </a>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center mb-16 px-4">
+            <div className="space-y-8 relative">
+              <div className="space-y-6 relative z-10">
+                <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
+                  {t("Contact.title")}
+                </h2>
+                <div className="space-y-6">
+                  <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-medium max-w-lg">
+                    {t("Contact.description")}
+                  </p>
+                  <div className="flex items-center gap-4 text-2xl font-semibold text-primary">
+                    <div className="p-3 rounded-full bg-primary/10">
+                      <Phone className="h-6 w-6" />
+                    </div>
+                    <span>+34 624 276 971</span>
+                  </div>
+                </div>
               </div>
+
+              {/* Background Decor - Large Paper Plane */}
+              {/* Background Decor - Large Paper Plane */}
+              <div className="absolute right-0 sm:-right-12 top-1/2 -translate-y-1/2 opacity-[0.03] dark:opacity-[0.05] pointer-events-none scale-100 sm:scale-150">
+                <Send className="w-48 h-48 sm:w-96 sm:h-96 -rotate-12" />
+              </div>
+            </div>
+
+            <div className="w-full space-y-6">
+              <p className="text-muted-foreground text-lg font-medium">
+                {t("Contact.email_alternative")}
+              </p>
+              <ContactForm />
             </div>
           </div>
         </section>

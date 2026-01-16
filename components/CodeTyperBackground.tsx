@@ -403,7 +403,7 @@ export default function CodeTyperBackground({
         basePre,
         phase === "fading"
           ? "transition-opacity duration-700 opacity-0"
-          : "opacity-45 dark:opacity-25",
+          : "opacity-60 dark:opacity-40",
         className
       )}
     >
