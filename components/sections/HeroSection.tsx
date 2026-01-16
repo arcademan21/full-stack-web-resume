@@ -53,7 +53,7 @@ export const HeroSection = ({ resumeData }: HeroSectionProps) => {
       <div className="max-w-7xl min-h-178">
         <div className="flex flex-col lg:flex-row items-start lg:items-start justify-between gap-10 lg:gap-16 mb-6">
           <div className="flex-1">
-            <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-balance mb-4">
+            <h1 className="text-[2.75rem] sm:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-balance mb-4">
               <span className="text-[#3f80ff]">Harold</span>y{" "}
               <span className="text-[#f15976]">Arturo</span> Pérez Rodríguez
             </h1>
@@ -72,7 +72,7 @@ export const HeroSection = ({ resumeData }: HeroSectionProps) => {
             </div>
 
             <div className="flex flex-wrap items-center gap-2 mb-6">
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 max-w-92 sm:max-w-2xl">
                 {t("Hero.description")}
               </p>
 
@@ -108,7 +108,7 @@ export const HeroSection = ({ resumeData }: HeroSectionProps) => {
                 </Button>
               </div>
 
-              <Card className="p-6 bg-accent/50 border-accent w-full max-w-2xl">
+              <Card className="p-6 bg-accent/50 border-accent w-auto sm:w-full max-w-2xl">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
                     <h3 className="text-lg font-semibold mb-1">
