@@ -146,7 +146,7 @@ export function ProjectsSection({ locale }: { locale: string }) {
       id="projects"
       className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-screen grid content-center"
     >
-      <div className="max-w-[28rem] lg:max-w-7xl w-full min-h-160">
+      <div className="max-w-[23rem] lg:max-w-7xl w-full min-h-160">
         <div className="flex flex-col space-y-4  mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold">{t("title")}</h2>
         </div>
