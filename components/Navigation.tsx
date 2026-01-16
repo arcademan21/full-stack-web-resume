@@ -75,7 +75,7 @@ export const Navigation = () => {
                 <SheetContent
                   side="left"
                   hideClose
-                  className="border-r border-border/40 w-[50vw] sm:w-[350px] bg-background"
+                  className="border-r border-border/40 w-[75vw] sm:w-[350px] bg-background"
                 >
                   {/* Reverse Grid Background */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_top,#4f4f4f2e_1px,transparent_1px)] bg-size-[18px_24px] pointer-events-none -z-10 mask-[linear-gradient(to_bottom,transparent,black)]"></div>

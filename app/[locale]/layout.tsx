@@ -8,6 +8,7 @@ import { getTranslations } from "next-intl/server";
 import { locales } from "@/i18n";
 import { notFound } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
+import { GameOfLifeLoader } from "@/components/GameOfLifeLoader";
 import "../globals.css";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -81,6 +82,7 @@ export default async function RootLayout({
         </NextIntlClientProvider>
         <Toaster />
         <Analytics />
+        <GameOfLifeLoader />
       </body>
     </html>
   );
