@@ -68,10 +68,10 @@ export const ExperienceSection = () => {
                               job.id === "adsdigital" && i === 1
                                 ? "https://www.editor-cv.com/"
                                 : job.id === "adsdigital" && i === 2
-                                ? "https://www.find-persons.com/"
-                                : job.id === "adsdigital" && i === 3
-                                ? "https://www.allremovebg.com/"
-                                : "#"
+                                  ? "https://www.find-persons.com/"
+                                  : job.id === "adsdigital" && i === 3
+                                    ? "https://www.allremovebg.com/"
+                                    : "#"
                             }
                             target="_blank"
                             rel="noopener noreferrer"
@@ -82,7 +82,7 @@ export const ExperienceSection = () => {
                         ),
                         link2: (chunks) => (
                           <a
-                            href="https://iq-testonline.com/"
+                            href="https://iq-testonline.es/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:underline font-bold"
