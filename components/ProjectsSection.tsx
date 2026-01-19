@@ -130,7 +130,7 @@ export function ProjectsSection({ locale }: { locale: string }) {
       id: "iq_test_online",
       imageFolder: "iq-test-online",
       imageCount: 2,
-      url: "https://iqtestonline.com",
+      url: "https://iq-testonline.com",
       tagCount: 4,
     },
   ];
@@ -182,7 +182,7 @@ export function ProjectsSection({ locale }: { locale: string }) {
                               <Badge key={i} variant="secondary">
                                 {t(`${project.id}.tags.${i}`)}
                               </Badge>
-                            )
+                            ),
                           )}
                         </div>
                       </div>
