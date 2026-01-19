@@ -82,7 +82,7 @@ export const ExperienceSection = () => {
                         ),
                         link2: (chunks) => (
                           <a
-                            href="https://iq-testonline.es/"
+                            href="https://iq-testonline.com/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:underline font-bold"
